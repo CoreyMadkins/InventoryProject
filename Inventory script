@@ -1,1 +1,39 @@
-Test test test
+import shutil
+import os
+from tkinter import Y
+import openpyxl
+from openpyxl import Workbook, load_workbook
+
+def ManageInventory():
+    x = input("Are you creating a new inventory?")
+    if x == "Yes" or "y" or "Y":
+        CreateTxtFile()
+        ManageInventory()
+    else: print("Ok")
+     
+    def CreateTxtFile():
+        NameFile = input("Name your file: ")
+        FileType = input("What is the file type?:")
+        NameFile = NameFile + FileType
+        with open(NameFile, "w") as file:
+            Context = input("Change this later!")
+        file.write(Context)
+        print (f"File '{NameFile}' created successfully")
+        return NameFile
+
+    def CheckForFile():
+        FileCheck = input("Paste your filepath here: ")
+        if os.path.exists(FileCheck):
+            print(f"The file '{FileCheck}' exists.")
+        else:
+            print("This File does not exist. Create the file, or run this program again to create the file")
+
+    def ManageInventory():
+        manage = "Y"     
+        while manage == "Y":
+
+            book = load_workbook(NameFile) # type: ignore
+            sheet = book.active
+            print("")
+
+            
