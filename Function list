@@ -1,0 +1,43 @@
+import shutil
+import os
+
+
+#Creates a file and allows intial input
+def CreateTxtFile():
+    NameFile = input("What are you calling this file?: ") + str(".csv")
+    #FilePath = input("Where do you want this file to be?:")
+    with open(NameFile, "w") as file:
+        Context = input("Write something funny")
+        file.write(Context)
+    print (f"File '{NameFile}' created successfully")
+    return NameFile
+
+CreateTxtFile()
+
+def AppendTxtFile():
+    FileCheck = input("What file are you looking for?")
+    FileCheck = FileCheck + str(".csv")
+    f = open(FileCheck, "r")
+    f.close()
+    Append = input("What do you want to add?: ")
+    f = open(FileCheck, "a")
+    f.write(Append)
+    f.close()
+    print(f"File '{FileCheck}' was successfully edited")
+    return FileCheck
+
+#AppendTxtFile()
+
+def OpenExcel():
+    File = input("Which Excel file are you opening?: " + str(".csv"))
+    workbook = openpyxl.load_workbook(File)
+    sheet = workbook.active
+    cell = sheet['A1']
+    value = cell.value
+    print(Value)
+    return value
+
+
+
+
+
