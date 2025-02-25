@@ -38,6 +38,28 @@ def OpenExcel():
     return value
 
 
+HOW TO MANAGE A SPECFIC EXCEL FILE
+||||||||||||||
+#install OpenPyXl
+import openpyxl
+from openpyxl import Workbook, load_workbook
+
+#load in your workbook
+book = load_workbook('Test.xlsx')
+sheet = book.active
+print(sheet['A2'].value)
+
+
+#Changes the value of the specified cell
+sheet['A2'].value = 'Spaghetti'
+
+
+#Saves the changes to the file. A MUST do.
+book.save('Test.xlsx')
+
+||||||||||||||||||
+
+
 
 
 
