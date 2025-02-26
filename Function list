@@ -59,6 +59,15 @@ book.save('Test.xlsx')
 
 ||||||||||||||||||
 
+def CheckForFile():
+        FileCheck = input("Paste your filepath here: ")
+        if os.path.exists(FileCheck):
+            print(f"The file '{FileCheck}' exists.")
+        else:
+            print("This File does not exist. Create the file, or run this program again to create the file")
+
+||||||||||||||||||||
+
 
 
 
