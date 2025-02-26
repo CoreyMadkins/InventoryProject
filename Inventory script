@@ -7,43 +7,54 @@ from openpyxl import Workbook, load_workbook
 def ManageInventory():
     x = input("Are you creating a new inventory?")
     if x == "Yes" or "y" or "Y":
-        CreateTxtFile()
+        CreateExcelFile()
         Manage()
     else: Manage()
      
-    def CreateTxtFile():
-        NameFile = input("Name your file: ")
-        FileType = input("What is the file type?:")
-        NameFile = NameFile + FileType
-        with open(NameFile, "w") as file:
-            Context = input("Change this later!")
-        file.write(Context)
-        print (f"File '{NameFile}' created successfully")
+def CreateExcelFile():
+        NameFile = input("Name your file: ") + ".xlsx"
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        Context = input("Enter initial content for the first cell: ")
+        sheet["A1"] = Context
+        workbook.save(NameFile)
+        print(f"File '{NameFile}' created successfully")
         return NameFile
 
-    def CheckForFile():
+    
+    
+def CheckForFile():
         FileCheck = input("Paste your filepath here: ")
         if os.path.exists(FileCheck):
             print(f"The file '{FileCheck}' exists.")
         else:
             print("This File does not exist. Create the file, or run this program again to create the file")
 
-    def Manage():
-        manage = "Y"     
-        while manage == "Y":
-            if 'NameFile' in locals():
+def Manage():
+    while True:
+        if 'NameFile' in locals():
+            pass
+        else:
+            NameFile = input("What file are you looking to manage?: ") + str(".xlsx")
 
-                return True
-            else:
-                NameFile = input("What file are you looking to manage?: ") + str(".xlsx")
-            book = load_workbook(NameFile) # type: ignore
+        try:
+            book = load_workbook(NameFile)
             sheet = book.active
-            Coordinate = input("Enter a Cell to edit... ")
-            Append = input("Enter your edit... ")
-            sheet[Coordinate].value = Append
-            print(sheet[Coordinate].value)
-            manage = input("Do you want to edit more? Y or N?: ")
+        except FileNotFoundError:
+            print(f"The file {NameFile} does not exist. Please try again.")
+            continue
 
+        Coordinate = input("Enter a Cell to edit... ")
+        Append = input("Enter your edit... ")
+
+        sheet[Coordinate].value = Append
+        print(sheet[Coordinate].value)
+        book.save(NameFile)
+
+        manage = input("Do you want to edit more? Y or N?: ").upper()
+        if manage != "Y":
+            break
+           
 ManageInventory()
 
 
